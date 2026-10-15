@@ -37,12 +37,41 @@
 
 <!-- ═══════════════════════ UNIT 5 — THE BUILD ═══════════════════════ -->
 
+## Milestone 1: Finding the Community's Distinctions
+
+**Community:** `r/movies`
+
+**Source:** https://www.reddit.com/r/movies/
+
+These are candidate distinctions observed while reading public top-level
+posts. They are observations for designing the taxonomy, not final labels yet.
+The main purpose of the post is the deciding factor when two patterns overlap.
+
+1. **Evidence-based movie analysis or review:** The writer evaluates a movie
+   and supports the evaluation with specific scenes, acting, dialogue,
+   comparisons, or other details.
+2. **Personal reaction or first impression:** The writer mainly shares a
+   feeling, preference, or immediate response without building a sustained
+   evidence-based argument.
+3. **Plot or ending clarification:** The post's main purpose is to ask about or
+   explain what happened, what the ending means, or how the story should be
+   understood. It is about resolving the story, not primarily judging the
+   movie's quality.
+4. **Movie-industry news or decisions:** The post focuses on an external event
+   or decision such as casting, a trailer, a release plan, or a studio choice,
+   rather than interpreting a completed movie.
+
+The hardest likely boundary is evidence-based analysis versus personal
+reaction. A post belongs in the first group when specific movie details do
+argumentative work; it belongs in the second when the details are absent or
+merely decorative and the post is mainly a feeling or broad opinion.
+
+---
+
 ## What This Does
 
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
-
-
 
 ---
 
