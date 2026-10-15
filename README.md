@@ -70,8 +70,14 @@ merely decorative and the post is mainly a feeling or broad opinion.
 
 ## What This Does
 
-<!-- Your community, and what your classifier sorts posts into. Three or four
-     sentences. -->
+TakeMeter will classify public top-level posts from the `r/movies` community.
+The classifier will sort posts by their main purpose: evaluating a movie,
+sharing an immediate personal response, clarifying a plot or ending, or
+discussing movie-industry news and decisions. The goal is to distinguish how
+people participate in movie discussions, not to decide whether a movie is good.
+
+**Declared stretch feature:** I am using a fourth label because industry news
+and decisions are a recurring kind of post that the other three do not cover.
 
 ---
 
@@ -83,33 +89,62 @@ merely decorative and the post is mainly a feeling or broad opinion.
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `analysis_review`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** A post whose main purpose is to evaluate or interpret a movie
+and support that evaluation with specific scenes, acting, dialogue,
+comparisons, or other details.
 
 **Example 1:**
->
+> [Gone Girl (2014): The Last Great Hollywood Thriller](https://www.reddit.com/r/movies/comments/1x65h59/gone_girl_2014_the_last_great_hollywood_thriller/)
 
 **Example 2:**
->
+> [The Ending of 'The Menu' [SPOILERS]](https://www.reddit.com/r/movies/comments/10qzsy2/the_ending_of_the_menu_spoilers/)
+
+### `personal_reaction`
+
+**Definition:** A post whose main purpose is sharing an immediate feeling,
+preference, or first impression without a sustained evidence-based argument.
+
+**Example 1:**
+> [Unofficial Discussion: Atonement (2026)](https://www.reddit.com/r/movies/comments/1x67zgs/unofficial_discussion_atonement_2026/)
+
+**Example 2:**
+> [Rush Hour is Brilliant](https://www.reddit.com/r/movies/comments/qn3odu/rush_hour_is_brilliant/)
+
+### `plot_clarification`
+
+**Definition:** A post whose main purpose is asking about or explaining what
+happened in a movie, what the ending means, or how the story should be
+understood, rather than judging the movie's quality.
+
+**Example 1:**
+> [Mr. K [SPOILERS]](https://www.reddit.com/r/movies/comments/1x66vv5/mr_k_spoilers/)
+
+**Example 2:**
+> [What are some movies where the ending makes it that nothing really mattered?](https://www.reddit.com/r/movies/comments/1ubzw8z/what_are_some_movies_where_the_end_makes_it_that/)
+
+### `industry_news`
+
+**Definition:** A post whose main purpose is discussing an external movie-
+industry event or decision, such as casting, a trailer, a release plan, or a
+studio choice, rather than a completed movie's content.
+
+**Example 1:**
+> [Has a casting announcement ever made you lose interest in an otherwise promising movie?](https://www.reddit.com/r/movies/comments/1tizkn3/has_a_casting_announcement_ever_made_you_lose/)
+
+**Example 2:**
+> [What's your “Best Trailer Ever” moment but the movie then let you down BIG time?](https://www.reddit.com/r/movies/comments/1o9vpvs/whats_your_best_trailer_ever_moment_but_the_movie/)
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `analysis_review` vs. `plot_clarification`
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**The decision rule I used every time:** If the post's main goal is to judge or
+interpret the movie's quality, craft, or themes, label it `analysis_review`,
+even if it discusses the ending. If its main goal is to resolve what happened
+or what the ending means, label it `plot_clarification`, even if it includes an
+opinion about whether the explanation is satisfying.
 
 
 
