@@ -53,61 +53,64 @@ whether you hit them:
 
 ## 1.
 
-<!-- Your criterion. It must name a number. -->
+The classifier will achieve at least **0.60 overall accuracy** on the held-out
+test set in each of three evaluation runs using seeds `42`, `7`, and `2024`.
 
-
-
-**Why this target:**
-
-
+**Why this target:** With four labels, a roughly even random guess would be
+about 0.25 accuracy. A 0.60 target means the classifier is getting a useful
+majority of posts right while leaving room for the small, hand-labelled
+dataset and the difficult boundary between movie analysis and plot
+clarification.
 
 ---
 
 ## 2.
 
-<!-- Your criterion. -->
+Every label will achieve at least **0.45 F1** on the held-out test set in each
+of three evaluation runs using seeds `42`, `7`, and `2024`.
 
 
-
-**Why this target:**
-
-
+**Why this target:** The four labels describe different purposes, so overall
+accuracy could hide a label that the model almost never recognizes. I am using
+a lower target than the overall accuracy target because `plot_clarification`
+and `industry_news` may be thinner and their test-set F1 scores will be more
+volatile.
 
 ---
 
 ## 3.
 
-<!-- Your criterion. -->
+No single label will account for more than **40% of the final dataset**.
 
-
-
-**Why this target:**
-
-
+**Why this target:** The assignment's hard ceiling is 70%, but a four-label
+classifier should be more balanced than merely passing that ceiling. Keeping
+the largest label at or below 40% should reduce the chance that the model can
+look accurate by mostly guessing the most common kind of `r/movies` post.
 
 ---
 
 ## 4.
 
-<!-- Your criterion. -->
+The spread between the highest and lowest **macro F1 scores across the three
+evaluation runs using seeds `42`, `7`, and `2024` will be no more than 0.10**.
 
-
-
-**Why this target:**
-
-
+**Why this target:** The test set will be small, especially for the thinner
+`plot_clarification` and `industry_news` labels. A spread of 0.10 or less
+would mean the overall measure is reasonably stable instead of depending on
+which few examples happened to land in each test split.
 
 ---
 
 ## 5.
 
-<!-- Your criterion. -->
+In each of the three evaluation runs using seeds `42`, `7`, and `2024`, the
+most-confident third of predictions will have at least **0.65 accuracy** and
+will be at least **0.10 more accurate than the least-confident third**.
 
-
-
-**Why this target:**
-
-
+**Why this target:** If the model is going to help sort a busy movie forum,
+its strongest predictions should be safer to trust than its least-certain
+ones. The 0.10 gap requires confidence to carry useful information without
+expecting perfect calibration from a small dataset.
 
 ---
 
