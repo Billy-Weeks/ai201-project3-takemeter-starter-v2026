@@ -134,7 +134,7 @@ studio choice, rather than a completed movie's content.
 > [Has a casting announcement ever made you lose interest in an otherwise promising movie?](https://www.reddit.com/r/movies/comments/1tizkn3/has_a_casting_announcement_ever_made_you_lose/)
 
 **Example 2:**
-> [What's your “Best Trailer Ever” moment but the movie then let you down BIG time?](https://www.reddit.com/r/movies/comments/1o9vpvs/whats_your_best_trailer_ever_moment_but_the_movie/)
+> [Joe Manganiello reveals plot of Ben Affleck's scrapped Batman film](https://www.reddit.com/r/movies/comments/1x8qn8x/joe_manganiello_reveals_plot_of_ben_afflecks/)
 
 ### The hardest boundary
 
