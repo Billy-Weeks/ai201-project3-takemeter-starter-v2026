@@ -221,13 +221,32 @@ accepted or corrected them. Each row keeps its Reddit source URL in `note`.
 
 **Base model:**
 
+`distilbert-base-uncased`
+
 **Settings:** <!-- epochs, learning rate, batch size, seed -->
+
+The run used 3 epochs, learning rate `2e-5`, batch size `16`, maximum length
+`128`, and seed `42`. It ran on the CPU with PyTorch `2.14.1+cpu`.
 
 **Anything I changed from the defaults, and why:**
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+Nothing. I kept the supplied defaults so the first run would provide a clear
+baseline for later comparisons.
+
+**Split sizes:**
+
+The stratified split produced 139 training posts, 31 validation posts, and 30
+test posts. The test set contained 9 `analysis_review`, 13
+`personal_reaction`, 4 `plot_clarification`, and 4 `industry_news` posts. The
+two four-example test groups are small, so their metrics may vary substantially
+in later seed comparisons.
+
+**First-run results:**
+
+The held-out test accuracy was `0.433` and macro F1 was `0.151`. Per-label F1
+was `0.000` for `analysis_review`, `0.605` for `personal_reaction`, `0.000`
+for `plot_clarification`, and `0.000` for `industry_news`. The most-confident
+third had `0.600` accuracy, while the least-confident third had `0.100`.
 
 
 
