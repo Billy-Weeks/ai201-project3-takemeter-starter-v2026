@@ -157,16 +157,25 @@ opinion about whether the explanation is satisfying.
 
 **Where the posts came from:**
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+I collected 200 public posts from [r/movies](https://www.reddit.com/r/movies/).
+The posts include reviews, reactions, questions about movie details, and
+movie-industry discussions.
+
+**How I labelled them:**
+
+I labelled the first 22 posts cold, without AI assistance, and marked them
+`cold` in the `note` column. I used AI assistance to propose labels for the
+remaining 178 posts, then checked the assignments against the taxonomy and
+accepted or corrected them. Each row keeps its Reddit source URL in `note`.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| `analysis_review` | 60 | 30% |
+| `personal_reaction` | 88 | 44% |
+| `plot_clarification` | 24 | 12% |
+| `industry_news` | 28 | 14% |
 | **Total** |  | 100% |
 
 **Three hard cases**
@@ -175,25 +184,34 @@ Say so plainly — the disclosure is required, not penalised. -->
      been, and what you chose. These are worth more than the easy 190. -->
 
 **1.**
-> *The post:*
+> *The post:* A post about the theory that *The Wizard of Oz* was intentionally
+> synchronized with Pink Floyd's *Dark Side of the Moon*.
 >
-> *Could have been:*
+> *Could have been:* `personal_reaction` or `analysis_review`
 >
-> *I chose, because:*
+> *I chose, because:* `analysis_review`. The writer expresses personal
+> excitement, but supports the interpretation with specific timing, lyric, and
+> scene comparisons.
 
 **2.**
-> *The post:*
+> *The post:* A question about whether a restored or uncensored “Bluth cut” of
+> *All Dogs Go to Heaven* might ever be released.
 >
-> *Could have been:*
+> *Could have been:* `industry_news` or `analysis_review`
 >
-> *I chose, because:*
+> *I chose, because:* `industry_news`. Although the writer explains why the
+> movie matters to them, the main question concerns an unavailable edit and
+> the release decision surrounding it.
 
 **3.**
-> *The post:*
+> *The post:* An article-style post describing the plot of Ben Affleck's
+> scrapped Batman movie and its planned villain and ending.
 >
-> *Could have been:*
+> *Could have been:* `industry_news` or `plot_clarification`
 >
-> *I chose, because:*
+> *I chose, because:* `industry_news`. It discusses production information
+> about an unreleased project rather than asking what happened in a completed
+> movie.
 
 ---
 
