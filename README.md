@@ -66,6 +66,12 @@ reaction. A post belongs in the first group when specific movie details do
 argumentative work; it belongs in the second when the details are absent or
 merely decorative and the post is mainly a feeling or broad opinion.
 
+*Update after labelling:* While labelling the full dataset, the boundary
+between `analysis_review` and `plot_clarification` turned out to be harder,
+because ending-focused posts often mix explaining the story with judging it.
+The final taxonomy below names that pair as the hardest boundary and gives the
+decision rule used.
+
 ---
 
 ## What This Does
@@ -96,10 +102,15 @@ and support that evaluation with specific scenes, acting, dialogue,
 comparisons, or other details.
 
 **Example 1:**
-> [Gone Girl (2014): The Last Great Hollywood Thriller](https://www.reddit.com/r/movies/comments/1x65h59/gone_girl_2014_the_last_great_hollywood_thriller/)
+> **[Practical Magic 2 had the cast and the world but not the script](https://www.reddit.com/r/movies/comments/1x72tbn/practical_magic_2_had_the_cast_and_the_world_but/)**
+> "Kylie is the one trying to break the curse, yet we barely see her do any
+> magic and her sister Antonia is hardly part of the plot. For a film that says
+> sisterhood is the strongest magic, the new sisters never get to show it."
 
 **Example 2:**
-> [The Ending of 'The Menu' [SPOILERS]](https://www.reddit.com/r/movies/comments/10qzsy2/the_ending_of_the_menu_spoilers/)
+> **["Sacrifice" is genuine absurdism](https://www.reddit.com/r/movies/comments/1x7z5ae/sacrifice_is_genuine_absurdism/)**
+> "By absurdism, I am referring to Camus' philosophy..." The post then quotes
+> Camus and *The Stranger* to argue that the film fits that philosophy.
 
 ### `personal_reaction`
 
@@ -107,10 +118,15 @@ comparisons, or other details.
 preference, or first impression without a sustained evidence-based argument.
 
 **Example 1:**
-> [Unofficial Discussion: Atonement (2026)](https://www.reddit.com/r/movies/comments/1x67zgs/unofficial_discussion_atonement_2026/)
+> **[Just watched Shawshank redemption and OH MY GOD!](https://www.reddit.com/r/movies/comments/1x9a0ty/just_watched_shawshank_redemption_and_oh_my_god/)**
+> "Where do I even begin?... Honestly I can't describe how incredible this
+> movie was with just words... I really can't! Just so incredible... So
+> beautiful... Definitely my favorite movie!"
 
 **Example 2:**
-> [Rush Hour is Brilliant](https://www.reddit.com/r/movies/comments/qn3odu/rush_hour_is_brilliant/)
+> **[I just watched Coco for the first time ever…I haven't cried like that in a minute!](https://www.reddit.com/r/movies/comments/1x96x0q/i_just_watched_coco_for_the_first_time_everi/)**
+> "Last night I watched Coco for the first time ever and wow, I did not expect
+> that ending! ... I started crying and my kids asked if I was alright"
 
 ### `plot_clarification`
 
@@ -119,10 +135,16 @@ happened in a movie, what the ending means, or how the story should be
 understood, rather than judging the movie's quality.
 
 **Example 1:**
-> [Mr. K [SPOILERS]](https://www.reddit.com/r/movies/comments/1x66vv5/mr_k_spoilers/)
+> **[La Bola Negra questions](https://www.reddit.com/r/movies/comments/1x96ulf/la_bola_negra_questions/)**
+> "Why does the Nationalist soldier who both sees Sebastian caressing Rafael
+> and catches him talking to Rafael when he's in jail, help him and bring
+> Rafael to him so they can talk alone? Why doesn't he report him?"
 
 **Example 2:**
-> [What are some movies where the ending makes it that nothing really mattered?](https://www.reddit.com/r/movies/comments/1ubzw8z/what_are_some_movies_where_the_end_makes_it_that/)
+> **[Was the ending to Thelma and Louise meant to be satirical?](https://www.reddit.com/r/movies/comments/1x89zou/was_the_ending_to_thelma_and_louise_meant_to_be/)**
+> "So I wonder, were they trying to go for a bittersweet honest feeling, or are
+> they trying to make you feel like the ending is much more darker as a result
+> and it's meant to be satirical darkness?"
 
 ### `industry_news`
 
@@ -131,10 +153,14 @@ industry event or decision, such as casting, a trailer, a release plan, or a
 studio choice, rather than a completed movie's content.
 
 **Example 1:**
-> [Has a casting announcement ever made you lose interest in an otherwise promising movie?](https://www.reddit.com/r/movies/comments/1tizkn3/has_a_casting_announcement_ever_made_you_lose/)
+> **[All Dogs Go To Heaven... any chance the Bluth cut (PG) cut gets released?](https://www.reddit.com/r/movies/comments/1x8r05n/all_dogs_go_to_heaven_any_chance_the_bluth_cut_pg/)**
+> "Is there ANY chance this exists? Is it long gone? A lost myth? Bluth's said
+> it's gone, but isn't there an HD still?"
 
 **Example 2:**
-> [Joe Manganiello reveals plot of Ben Affleck's scrapped Batman film](https://www.reddit.com/r/movies/comments/1x8qn8x/joe_manganiello_reveals_plot_of_ben_afflecks/)
+> **[Joe Manganiello reveals plot of Ben Affleck's scrapped Batman film](https://www.reddit.com/r/movies/comments/1x8qn8x/joe_manganiello_reveals_plot_of_ben_afflecks/)**
+> "From the article: • Deathstroke would be the main villain, dismantling
+> Batman's life after thinking he killed his son"
 
 ### The hardest boundary
 
@@ -176,7 +202,7 @@ accepted or corrected them. Each row keeps its Reddit source URL in `note`.
 | `personal_reaction` | 88 | 44% |
 | `plot_clarification` | 24 | 12% |
 | `industry_news` | 28 | 14% |
-| **Total** |  | 100% |
+| **Total** | 200 | 100% |
 
 **Three hard cases**
 
@@ -212,6 +238,19 @@ accepted or corrected them. Each row keeps its Reddit source URL in `note`.
 > *I chose, because:* `industry_news`. It discusses production information
 > about an unreleased project rather than asking what happened in a completed
 > movie.
+
+**4.**
+> *The post:* [An Explanation of Na Hong-Jin's HOPE](https://www.reddit.com/r/movies/comments/1x87pug/an_explanation_of_na_hongjins_hope/),
+> a long breakdown of what the film is about, which the writer says is "a
+> smart movie, made by someone with a track record of making smart movies, and
+> worth engaging with."
+>
+> *Could have been:* `plot_clarification` or `analysis_review`
+>
+> *I chose, because:* `analysis_review`. The title says "explanation", but by
+> the decision rule the post's main goal is to defend the film's quality
+> against people calling it a parody or "all over the place", not to resolve
+> what happened. The explanation is evidence for that judgment.
 
 ---
 
