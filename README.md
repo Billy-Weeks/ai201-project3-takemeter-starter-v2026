@@ -263,17 +263,31 @@ third had `0.600` accuracy, while the least-confident third had `0.100`.
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Help comparing possible distinctions in r/movies and
+  testing whether the proposed labels were meaningfully separate.
+- *What came back:* The discussion identified analysis/review, personal
+  reaction, plot clarification, and industry news as useful patterns, with the
+  main boundary between evaluating a movie and explaining its plot.
+- *What I changed:* I changed the broad discussion category into
+  `personal_reaction` and kept `industry_news` as a fourth label because it
+  captured production and release posts the other labels missed.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Help classify the collected posts consistently under the
+  written taxonomy and check the CSV formatting.
+- *What came back:* The AI proposed labels for the non-cold posts and helped
+  identify quoting, URL, duplicate, and row-count problems in the CSV.
+- *What I changed:* I reviewed the proposed labels against the taxonomy,
+  accepted or corrected them, and fixed the CSV structure while preserving the
+  source URLs.
 
 **Pre-labelling disclosure:**
+
+I labelled the first 22 posts cold without AI assistance. The remaining 178
+posts were initially labelled with AI assistance, then read and checked against
+the taxonomy before being accepted or corrected. The `note` column marks these
+rows as `AI-assisted` and retains their source URL.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
