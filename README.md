@@ -85,6 +85,20 @@ people participate in movie discussions, not to decide whether a movie is good.
 **Declared stretch feature:** I am using a fourth label because industry news
 and decisions are a recurring kind of post that the other three do not cover.
 
+**What the fourth label captures that the first three missed:** The first
+three labels all describe how someone engages with a movie that already
+exists: judging it (`analysis_review`), reacting to it (`personal_reaction`),
+or working out its story (`plot_clarification`). A large share of `r/movies`
+posts are about something outside the finished film instead: a new poster, a
+casting or director change, a project put on hold, studio interference and
+reshoots, or a funding or distribution decision. For example, "Taika
+Waititi's 'Star Wars' film is now on hold" or "First Poster for
+'Hurricanna'". There is no finished movie to evaluate, react to, or explain,
+so without `industry_news` these posts would be forced into one of the other
+three labels. That would blur those labels' definitions. In the final dataset
+the label covers 28 of 200 posts (14%), which is more than
+`plot_clarification` (24).
+
 ---
 
 ## Label Taxonomy
