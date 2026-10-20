@@ -356,16 +356,41 @@ rows as `AI-assisted` and retains their source URL.
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.300 | 0.433 | +0.133 |
+| Macro F1 | 0.239 | 0.151 | -0.088 |
+| F1 — `analysis_review` | 0.308 | 0.000 | -0.308 |
+| F1 — `industry_news` | 0.316 | 0.000 | -0.316 |
+| F1 — `personal_reaction` | 0.333 | 0.605 | +0.271 |
+| F1 — `plot_clarification` | 0.000 | 0.000 | +0.000 |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
 
+Before seeing the results, I predicted that the trained model would beat the
+zero-shot baseline most clearly on `personal_reaction`, but would most likely
+not beat it on `analysis_review`, `plot_clarification`, or `industry_news`.
+
 **What the gap actually means:**
+I also ran the baseline without `label_definitions.txt`, using only the bare
+label names. The definitions-based baseline had 0.300 accuracy and 0.239 macro
+F1. The bare-label baseline had higher accuracy at 0.433 but lower macro F1 at
+0.200.
+
+| Measure | With Definitions | Bare Label Names | Bare - Definitions |
+|---|---:|---:|---:|
+| Overall accuracy | 0.300 | 0.433 | +0.133 |
+| Macro F1 | 0.239 | 0.200 | -0.039 |
+| F1 — `analysis_review` | 0.308 | 0.200 | -0.108 |
+| F1 — `industry_news` | 0.316 | 0.000 | -0.316 |
+| F1 — `personal_reaction` | 0.333 | 0.600 | +0.267 |
+| F1 — `plot_clarification` | 0.000 | 0.000 | +0.000 |
+
+This shows that the definitions improved balance across labels, especially
+`industry_news`, even though they reduced overall accuracy on this split. The
+definitions-based run remains the official baseline because it is the fair
+comparison using the taxonomy written for the task. The bare-label results are
+recorded in `baseline_results_bare.json` as an additional ablation.
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
 
