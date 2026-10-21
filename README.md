@@ -403,6 +403,21 @@ recorded in `baseline_results_bare.json` as an additional ablation.
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
 
+### Three-seed spread
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.433 | 0.433 | 0.433 | 0.000 |
+| Macro F1 | 0.151 | 0.151 | 0.151 | 0.000 |
+| F1 — `analysis_review` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `personal_reaction` | 0.605 | 0.605 | 0.605 | 0.000 |
+| F1 — `plot_clarification` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `industry_news` | 0.000 | 0.000 | 0.000 | 0.000 |
+
+Accuracy moved 0.000 across seeds. The score is stable across seeds, but the
+model consistently collapses into `personal_reaction`; stability does not mean
+the model meets the targets.
+
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
 | 1.  |  |  |  |  |  |
@@ -416,13 +431,21 @@ recorded in `baseline_results_bare.json` as an additional ablation.
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
-|---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+**Device:** `cpu` (CPU)
+
+| true \ predicted | analysis_review | personal_reaction | plot_clarification | industry_news |
+|---|---|---|---|---|
+| **analysis_review** | 0 | 9 | 0 | 0 |
+| **personal_reaction** | 0 | 13 | 0 | 0 |
+| **plot_clarification** | 0 | 4 | 0 | 0 |
+| **industry_news** | 0 | 4 | 0 | 0 |
 
 **My biggest off-diagonal number, and what it means:**
+The biggest confusion is 9 real `analysis_review` posts classified as
+`personal_reaction`, while 0 real `personal_reaction` posts were classified as
+`analysis_review`. This is lopsided: the model leans toward
+`personal_reaction` on this pair. The agreement report will help determine
+whether this points to inconsistent labeling or a model limitation.
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->

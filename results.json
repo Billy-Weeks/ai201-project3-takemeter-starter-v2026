@@ -56,10 +56,10 @@
     }
   },
   "confidence": {
-    "mean_when_right": 0.43863385915756226,
-    "mean_when_wrong": 0.4177843928337097,
+    "mean_when_right": 0.44032442569732666,
+    "mean_when_wrong": 0.4174741804599762,
     "accuracy_most_confident_third": 0.6,
-    "accuracy_least_confident_third": 0.1,
+    "accuracy_least_confident_third": 0.2,
     "n_per_third": 10
   },
   "device": "cpu",
