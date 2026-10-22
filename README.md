@@ -461,11 +461,11 @@ whether this points to inconsistent labeling or a model limitation.
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | >= 0.60 in every seed | MISSED | Accuracy was 0.433 for seeds 42, 7, and 2024. |
+| 2 | Every label F1 | >= 0.45 for every label in every seed | MISSED | `personal_reaction` reached 0.605, but `analysis_review`, `plot_clarification`, and `industry_news` were 0.000 in every seed. |
+| 3 | Dataset balance | No label above 40% of the dataset | MISSED | `personal_reaction` has 88 of 200 posts, or 44%. |
+| 4 | Macro F1 stability | Spread <= 0.10 across seeds | MET | Macro F1 was 0.151 in all three seeds; spread was 0.000. |
+| 5 | Confidence usefulness | Most-confident third >= 0.65 and >= 0.10 above least-confident third | MISSED | Seed 42 was 0.600 vs. 0.200; seed 7 was 0.400 vs. 0.400; seed 2024 was 0.400 vs. 0.200. |
 
 **Diagnoses**
 
@@ -477,6 +477,52 @@ whether this points to inconsistent labeling or a model limitation.
      ⚠️ Use your agreement report as evidence. It is the only instrument you
      have that can tell a LABELLING problem from a MODEL problem, and this
      section is graded on whether you used it that way. -->
+
+No criteria were revised. All five were measurable as written.
+
+The staff agreement was 100%, but that check used the separate three-label
+staff taxonomy rather than my four-label movie taxonomy. It shows that I could
+apply an external written rule consistently, but it is not direct evidence
+that my own 200 labels used the same boundaries consistently.
+
+### Criterion 1 — overall accuracy: MISSED
+
+The cause was a model failure amplified by the label imbalance, not an
+unlucky split. The model predicted `personal_reaction` for all 30 test posts,
+so it got only the 13 true `personal_reaction` posts correct and reached 0.433
+accuracy in every seed, below the 0.60 target. The 0.000 spread shows that the
+miss was repeated across the three splits rather than caused by one unusually
+hard draw. The model did not learn the distinctions among the four labels from
+this training setup and dataset.
+
+### Criterion 2 — every label F1: MISSED
+
+The confusion matrix shows the same majority-class collapse: F1 was 0.605 for
+`personal_reaction`, but 0.000 for `analysis_review`, `plot_clarification`, and
+`industry_news` in all three seeds. The thinner labels have only 24 and 28
+examples in the dataset and only four test examples each, which makes their
+scores volatile, but thin data cannot fully explain the failure because
+`analysis_review` has 60 examples and also received F1 0. The evidence points
+to the model learning the majority-label shortcut instead of the intended
+boundaries.
+
+### Criterion 3 — dataset balance: MISSED
+
+This was a data-collection problem rather than a model problem. The target
+allowed no label above 40%, but `personal_reaction` accounts for 88 of 200
+posts, or 44%. That imbalance is directly visible in the dataset counts and
+helps explain why the model could obtain 0.433 accuracy by predicting that
+label for every test post.
+
+### Criterion 5 — confidence usefulness: MISSED
+
+The model's confidence was not a reliable signal. For seed 42, the most-
+confident third was correct 0.600 of the time versus 0.200 for the least-
+confident third; seed 7 was 0.400 versus 0.400; and seed 2024 was 0.400 versus
+0.200. Only seed 42 had the required 0.10 gap, and none reached the 0.65
+accuracy target. The varying confidence gaps alongside the same all-
+`personal_reaction` predictions show that confidence did not identify a safe
+subset of predictions.
 
 
 
