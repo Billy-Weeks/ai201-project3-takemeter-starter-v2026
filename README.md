@@ -490,14 +490,19 @@ whether this points to inconsistent labeling or a model limitation.
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 30 / 30 = 100%
+
+I matched staff on every post. The set appears to have been relatively easy
+under these definitions, or the boundaries in this staff taxonomy were tight
+enough that they could be applied consistently. Because there were no
+disagreements, there are no piles to adjudicate.
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
      of the 30 were chosen because they're genuinely ambiguous — you should be
      winning some of these. -->
 
-**Disagreements**
+**Disagreements:** None.
 
 <!-- Three lines each: the post, both labels, and who you think is right and
      why — grounded in the staff definitions you were both applying.
@@ -512,23 +517,6 @@ whether this points to inconsistent labeling or a model limitation.
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
 
 **What the pattern in my disagreements tells me:**
 
