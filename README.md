@@ -574,7 +574,18 @@ disagreements, there are no piles to adjudicate.
 
 **What I changed:**
 
+**Planned improvement before implementation:** I will add 30 new,
+carefully reviewed `plot_clarification` examples to the dataset. This is the
+thinnest label and one of the labels with F1 0.000 across all three seeds. The
+new examples should also reduce `personal_reaction` from 44% of the dataset to
+about 38%, addressing the majority-class shortcut.
+
 **Which diagnosis pointed at it:**
+
+The confusion matrix showed that the model predicted `personal_reaction` for
+all 30 test posts, while `plot_clarification` had only 24 examples in the
+dataset and F1 0.000. Criterion 3 also showed that `personal_reaction` made up
+44% of the dataset, above the 40% target.
 
 ### Run Log — After
 
