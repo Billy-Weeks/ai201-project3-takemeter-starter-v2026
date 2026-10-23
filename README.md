@@ -337,6 +337,25 @@ third had `0.600` accuracy, while the least-confident third had `0.100`.
   accepted or corrected them, and fixed the CSV structure while preserving the
   source URLs.
 
+**Unit 6: Moment 1**
+
+- *What I asked for:* Help compare the before and after run logs, calculate the
+  metric changes across seeds, and interpret the confusion matrices.
+- *What came back:* The AI summarized the accuracy, macro F1, per-label F1,
+  spread, and confusion-matrix changes across the three seeds.
+- *What I changed:* I checked the reported values against the generated JSON
+  files before adding the comparison and conclusion to the README.
+
+**Unit 6: Moment 2**
+
+- *What I asked for:* Help apply two label corrections identified in the
+  reviewer feedback.
+- *What came back:* The AI identified one criticism as `personal_reaction`
+  rather than plot clarification, and one film evaluation as
+  `analysis_review` rather than plot clarification.
+- *What I changed:* I reviewed both cases against the taxonomy and accepted
+  the corrections, documenting the reasons in the dataset notes and README.
+
 **Pre-labelling disclosure:**
 
 I labelled the first 22 posts cold without AI assistance. The remaining 178
