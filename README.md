@@ -420,14 +420,6 @@ Accuracy moved 0.000 across seeds. The score is stable across seeds, but the
 model consistently collapses into `personal_reaction`; stability does not mean
 the model meets the targets.
 
-| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
-|---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
-
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
@@ -595,17 +587,39 @@ dataset and F1 0.000. Criterion 3 also showed that `personal_reaction` made up
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | >= 0.60 | 0.514 | 0.400 | 0.514 | MISSED |
+| 2. Every label F1 | >= 0.45 for every label | analysis 0.000; personal 0.622; plot 0.667; industry 0.000 | analysis 0.000; personal 0.571; plot 0.000; industry 0.000 | analysis 0.000; personal 0.622; plot 0.667; industry 0.000 | MISSED |
+| 3. Dataset balance | No label above 40% | 38.7% personal | 38.7% personal | 38.7% personal | MET |
+| 4. Macro F1 spread | <= 0.10 | 0.322 | 0.143 | 0.322; spread 0.179 | MISSED |
+| 5. Confidence usefulness | Most-confident third >= 0.65 and >= 0.10 above least-confident third | 0.545 vs 0.455 | 0.545 vs 0.091 | 0.455 vs 0.545 | MISSED |
+
+The after-run device was `cpu`. Accuracy spread was 0.114 and macro F1
+spread was 0.179 across the three seeds.
+
+**After confusion matrix**
+
+| true \\ predicted | analysis_review | personal_reaction | plot_clarification | industry_news |
+|---|---:|---:|---:|---:|
+| **analysis_review** | 0 | 9 | 0 | 0 |
+| **personal_reaction** | 0 | 14 | 0 | 0 |
+| **plot_clarification** | 0 | 4 | 4 | 0 |
+| **industry_news** | 0 | 4 | 0 | 0 |
+
+The new examples helped the model recognize `plot_clarification`: it reached
+F1 0.667 for seeds 42 and 2024, compared with 0.000 before. The improvement
+was not sufficient overall: mean accuracy rose from 0.433 before to 0.476
+after, and mean macro F1 rose from 0.151 to 0.262, but `analysis_review` and
+`industry_news` remained at F1 0.000 and the macro-F1 spread increased to
+0.179. The change therefore helped one diagnosed failure partially, but did
+not meet the overall accuracy, per-label, or stability targets.
 
 **Did it help, and how do I know:**
 
 <!-- If it didn't, say so. Relabelling that didn't help is a genuinely
      interesting result and earns full credit. -->
 
+It helped partially: `plot_clarification` improved substantially in two
+seeds, but the overall targets were not met and stability worsened.
 
 
 ---
