@@ -95,9 +95,11 @@ reshoots, or a funding or distribution decision. For example, "Taika
 Waititi's 'Star Wars' film is now on hold" or "First Poster for
 'Hurricanna'". There is no finished movie to evaluate, react to, or explain,
 so without `industry_news` these posts would be forced into one of the other
-three labels. That would blur those labels' definitions. In the final dataset
-the label covers 28 of 200 posts (14%), which is more than
-`plot_clarification` (24).
+three labels. That would blur those labels' definitions. In the original
+dataset the label covered 28 of 200 posts (14%), which was more than
+`plot_clarification` (24). After the planned improvement, the dataset has 230
+posts and 52 `plot_clarification` examples after two reviewer-identified
+consistency corrections.
 
 ---
 
@@ -212,11 +214,11 @@ accepted or corrected them. Each row keeps its Reddit source URL in `note`.
 
 | Label | Count | Share |
 |---|---|---|
-| `analysis_review` | 60 | 30% |
-| `personal_reaction` | 88 | 44% |
-| `plot_clarification` | 24 | 12% |
-| `industry_news` | 28 | 14% |
-| **Total** | 200 | 100% |
+| `analysis_review` | 61 | 26.5% |
+| `personal_reaction` | 89 | 38.7% |
+| `plot_clarification` | 52 | 22.6% |
+| `industry_news` | 28 | 12.2% |
+| **Total** | 230 | 100% |
 
 **Three hard cases**
 
@@ -574,11 +576,13 @@ disagreements, there are no piles to adjudicate.
 
 **What I changed:**
 
-**Planned improvement before implementation:** I will add 30 new,
-carefully reviewed `plot_clarification` examples to the dataset. This is the
-thinnest label and one of the labels with F1 0.000 across all three seeds. The
-new examples should also reduce `personal_reaction` from 44% of the dataset to
-about 38%, addressing the majority-class shortcut.
+**Improvement implemented:** I added 30 AI-assisted, source-linked
+`plot_clarification` examples after removing the four ad hoc additions. I
+also corrected two reviewer-identified consistency errors: one criticism was
+changed to `personal_reaction`, and one film evaluation was changed to
+`analysis_review`. The new examples were reviewed before the next run and
+retain their source URLs in the `note` column. This increased the dataset from 200 to 230 posts
+and reduced `personal_reaction` from 44% to 38.7%.
 
 **Which diagnosis pointed at it:**
 
