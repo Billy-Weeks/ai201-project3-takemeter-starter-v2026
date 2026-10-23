@@ -628,12 +628,45 @@ seeds, but the overall targets were not met and stability worsened.
 
 <!-- For each criterion still missed: what you'd do, and why you stopped. -->
 
+The overall accuracy target is still missed: the after-run accuracies were
+0.514, 0.400, and 0.514, averaging 0.476 rather than the 0.60 target. I
+would collect more representative examples and tune the training setup before
+claiming the model is reliable; the current run still favors
+`personal_reaction`.
+
+The per-label target is still missed for `analysis_review` and
+`industry_news`, which stayed at F1 0.000 in all three after seeds. The
+after-matrix shows all 9 `analysis_review` test posts and all 4
+`industry_news` test posts being called `personal_reaction`; `industry_news`
+also has only 28 examples in the full dataset, while the model has not learned
+the `analysis_review` boundary despite 61 examples. I would add more varied,
+clearly labeled examples for both classes and inspect the 128-token inputs
+before another training run.
+
+The stability target is still missed: macro F1 ranged from 0.143 to 0.322,
+for a spread of 0.179. This variation is driven largely by
+`plot_clarification`, which reached F1 0.667 in seeds 42 and 2024 but 0.000 in
+seed 7, so the new examples helped but did not make that label dependable.
+
+The confidence target is still missed. The most- versus least-confident-third
+accuracies were 0.545 vs 0.455, 0.545 vs 0.091, and 0.455 vs 0.545 across the
+three seeds; none reached the required 0.65 most-confident accuracy. I would
+calibrate or otherwise validate confidence only after the label predictions
+are no longer collapsing toward one class.
+
 
 
 **The gap between what I meant my labels to capture and what the model
 learned:**
 <!-- Two sentences. Your confusion matrix is the evidence. -->
 
+The taxonomy distinguishes evaluating a movie (`analysis_review`), reacting to
+it (`personal_reaction`), explaining its story (`plot_clarification`), and
+discussing industry events (`industry_news`), but the model still maps most
+inputs to `personal_reaction`. The after matrix shows that the added plot
+examples created a usable plot signal in two seeds, while analysis and news
+remain indistinguishable from the majority class for this amount and shape of
+training data.
 
 
 <!-- ═════════════════════════════════════════════════════════════════════
@@ -660,8 +693,8 @@ learned:**
        [ ] A diagnosis for every miss, using the agreement report as evidence
        [ ] Agreement Report with every disagreement adjudicated
        [ ] One improvement, with Run Log — After
-       [ ] What's Still Broken
-       [ ] results_three_seeds_before.json, results_three_seeds_after.json,
+       [x] What's Still Broken
+       [x] results_three_seeds_before.json, results_three_seeds_after.json,
            baseline_results.json and
            agreement_results.json committed
        [ ] At least four new commits
