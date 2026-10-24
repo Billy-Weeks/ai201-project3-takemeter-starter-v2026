@@ -602,7 +602,25 @@ all 30 test posts, while `plot_clarification` had only 24 examples in the
 dataset and F1 0.000. Criterion 3 also showed that `personal_reaction` made up
 44% of the dataset, above the 40% target.
 
+### Declared stretch feature — per-label error write-up (+1)
+
+Before implementing this stretch feature, I declare that I will write a
+per-label error analysis of the worst-performing label from the confusion
+matrix, including the label it is most often confused with and what those
+examples have in common.
+
 ### Run Log — After
+
+### Three-seed spread
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.514 | 0.400 | 0.514 | 0.114 |
+| Macro F1 | 0.322 | 0.143 | 0.322 | 0.179 |
+| F1 — `analysis_review` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `personal_reaction` | 0.622 | 0.571 | 0.622 | 0.051 |
+| F1 — `plot_clarification` | 0.667 | 0.000 | 0.667 | 0.667 |
+| F1 — `industry_news` | 0.000 | 0.000 | 0.000 | 0.000 |
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
