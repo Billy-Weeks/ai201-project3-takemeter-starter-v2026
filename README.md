@@ -210,6 +210,10 @@ I labelled the first 22 posts cold, without AI assistance, and marked them
 remaining 178 posts, then checked the assignments against the taxonomy and
 accepted or corrected them. Each row keeps its Reddit source URL in `note`.
 
+In Unit 6 I added 30 more AI-assisted, source-linked `plot_clarification`
+posts as the planned improvement and corrected 2 existing rows, bringing the
+dataset to the 230 posts counted below (see The Improvement).
+
 **Counts per label:**
 
 | Label | Count | Share |
@@ -356,6 +360,19 @@ third had `0.600` accuracy, while the least-confident third had `0.100`.
 - *What I changed:* I reviewed both cases against the taxonomy and accepted
   the corrections, documenting the reasons in the dataset notes and README.
 
+**Unit 6: Moment 3**
+
+- *What I asked for:* A check of the repository against the Unit 6
+  requirements, plus a script to show what the model reads after the
+  128-token cap.
+- *What came back:* The AI found that the Before run log was missing the
+  per-seed criteria table, that the improvement also included two relabels,
+  and that the before and after runs used different test sets. It also wrote
+  `truncation_check.py`, which showed that 67% of `analysis_review` posts are
+  truncated.
+- *What I changed:* I added the missing table and caveats, and used the
+  truncation results as evidence in the diagnoses.
+
 **Pre-labelling disclosure:**
 
 I labelled the first 22 posts cold without AI assistance. The remaining 178
@@ -412,6 +429,13 @@ This shows that the definitions improved balance across labels, especially
 definitions-based run remains the official baseline because it is the fair
 comparison using the taxonomy written for the task. The bare-label results are
 recorded in `baseline_results_bare.json` as an additional ablation.
+
+**Note on the files:** This table compares both models on the original 30-post
+`test_split.csv` from Unit 5. After the improvement, the notebook overwrote
+`results.json` and `test_split.csv` with the after run (seed 42, 35 test
+posts). `baseline_results.json` still holds the baseline on the original 30
+posts, so rerunning `python baseline.py --trained results.json` now would not
+reproduce this table on matching posts.
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
 
@@ -438,6 +462,18 @@ recorded in `baseline_results_bare.json` as an additional ablation.
 Accuracy moved 0.000 across seeds. The score is stable across seeds, but the
 model consistently collapses into `personal_reaction`; stability does not mean
 the model meets the targets.
+
+### Five criteria across three seeds
+
+| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+|---|---|---|---|---|---|
+| 1. Overall accuracy | >= 0.60 | 0.433 | 0.433 | 0.433 | MISSED |
+| 2. Every label F1 | >= 0.45 for every label | analysis 0.000; personal 0.605; plot 0.000; industry 0.000 | analysis 0.000; personal 0.605; plot 0.000; industry 0.000 | analysis 0.000; personal 0.605; plot 0.000; industry 0.000 | MISSED |
+| 3. Dataset balance | No label above 40% | 44.0% personal | 44.0% personal | 44.0% personal | MISSED |
+| 4. Macro F1 spread | <= 0.10 | 0.151 | 0.151 | 0.151; spread 0.000 | MET |
+| 5. Confidence usefulness | Most-confident third >= 0.65 and >= 0.10 above least-confident third | 0.600 vs 0.200 | 0.400 vs 0.400 | 0.400 vs 0.200 | MISSED |
+
+The before-run device was `cpu`, with seeds `42`, `7`, and `2024`.
 
 ### Confusion matrix
 
@@ -519,6 +555,29 @@ scores volatile, but thin data cannot fully explain the failure because
 to the model learning the majority-label shortcut instead of the intended
 boundaries.
 
+**What the model actually receives:** As the Unit 5 feedback suggested, I
+checked the inputs after the 128-token cap with `truncation_check.py` before
+blaming dataset size alone. To reproduce the table below, run
+`python truncation_check.py` with the virtual environment activated:
+
+| Label | Posts | Truncated | Share | Median tokens |
+|---|---:|---:|---:|---:|
+| `analysis_review` | 61 | 41 | 67% | 216 |
+| `industry_news` | 28 | 9 | 32% | 94 |
+| `personal_reaction` | 89 | 55 | 62% | 145 |
+| `plot_clarification` | 52 | 15 | 29% | 58 |
+
+`analysis_review` posts are the longest, and two thirds of them are cut off.
+The decoded input for the *Crash* post stops after the writer's opening
+reaction ("thought it was the worst film i've seen in years... i would give it
+a 2 / 10 at best"), before the evaluation that makes it `analysis_review`.
+What survives the cap reads like a `personal_reaction`, which matches the 9
+analysis posts → `personal_reaction` cell of the confusion matrix. The
+truncation is part of the cause of the `analysis_review` failure, not only a
+possibility. `plot_clarification` posts are the shortest and least truncated,
+which is consistent with it being the one label that improved once it had
+more examples.
+
 ### Criterion 3 — dataset balance: MISSED
 
 This was a data-collection problem rather than a model problem. The target
@@ -579,6 +638,15 @@ disagreements, there are no piles to adjudicate.
 
 **What the pattern in my disagreements tells me:**
 
+There was no disagreement pattern to sort into piles. Staff marked 7 of the 30
+posts as `borderline`, and I matched staff on all 7 as well, so this check
+found no sign that I apply a written decision rule loosely. The limit is that
+these posts used the three-label staff taxonomy, not my four-label movie
+taxonomy, so it does not rule out inconsistency in my own `labels.csv`; the
+reviewer-identified relabels described under The Improvement show that some
+did exist there. I labelled all 30 posts and saved `my_staff_labels.csv`
+before opening `data/staff_labels.csv`; both files were committed together in
+`ad18da4`.
 
 
 ---
@@ -588,12 +656,24 @@ disagreements, there are no piles to adjudicate.
 **What I changed:**
 
 **Improvement implemented:** I added 30 AI-assisted, source-linked
-`plot_clarification` examples after removing the four ad hoc additions. I
-also corrected two reviewer-identified consistency errors: one criticism was
-changed to `personal_reaction`, and one film evaluation was changed to
-`analysis_review`. The new examples were reviewed before the next run and
-retain their source URLs in the `note` column. This increased the dataset from 200 to 230 posts
-and reduced `personal_reaction` from 44% to 38.7%.
+`plot_clarification` examples to the thinnest label. The new examples were
+reviewed against the taxonomy before the next run and retain their source URLs
+in the `note` column. This increased the dataset from 200 to 230 posts and
+reduced `personal_reaction` from 44% to 38.7%.
+
+**A second, smaller edit went in with it:** In the same commit I also
+corrected the two consistency errors named in the Unit 5 feedback. The "you
+missed the point" criticism post was changed from `plot_clarification` to
+`personal_reaction`, and the "How is *Crash* a highly rated film?" post was
+changed from `plot_clarification` to `analysis_review`. That is 2 of 230 rows,
+so the planned change was the 30 additions, but the after run measures both
+edits together and I cannot attribute the results to the additions alone.
+
+**The before and after runs were not scored on the same posts.** Adding 30
+rows changed the stratified split, so the after test set has 35 posts (9
+`analysis_review`, 14 `personal_reaction`, 8 `plot_clarification`, 4
+`industry_news`) instead of the original 30. The seeds are the same, but part
+of the before/after difference may come from the different test posts.
 
 **Which diagnosis pointed at it:**
 
@@ -617,11 +697,12 @@ reverse confusion was 0. The analysis posts commonly ask the reader to judge
 or interpret a movie—examples include evaluating why *Crash* is highly rated,
 comparing old and new versions of *Evil Dead*, and debating a film theory—so
 their purpose is evaluation even when the wording contains a question. The
-model is treating that evaluative/questioning language as a personal response,
-and the 128-token input limit may leave it with titles or opening phrasing
-rather than the evidence that distinguishes analysis from reaction. This is
-consistent with the matrix and repeated seed results, but it is not proof that
-the token limit is the only cause.
+model is treating that evaluative/questioning language as a personal response.
+The truncation check shows why: 41 of 61 `analysis_review` posts (67%) exceed
+the 128-token cap, with a median of 216 tokens, so the model often sees only
+the title and the opening reaction, not the evidence that distinguishes
+analysis from reaction. This is consistent with the matrix and repeated seed
+results, but it is not proof that the token limit is the only cause.
 
 ### Run Log — After
 
@@ -691,8 +772,10 @@ after-matrix shows all 9 `analysis_review` test posts and all 4
 `industry_news` test posts being called `personal_reaction`; `industry_news`
 also has only 28 examples in the full dataset, while the model has not learned
 the `analysis_review` boundary despite 61 examples. I would add more varied,
-clearly labeled examples for both classes and inspect the 128-token inputs
-before another training run.
+clearly labeled examples for both classes. Because `truncation_check.py`
+shows 67% of `analysis_review` posts are cut at 128 tokens, the next single
+change I would test is raising `max_length` to 256 so the model sees the
+evidence that defines that label.
 
 The stability target is still missed: macro F1 ranged from 0.143 to 0.322,
 for a spread of 0.179. This variation is driven largely by
@@ -737,19 +820,19 @@ training data.
 
      SUBMISSION CHECKLIST — unit 6
 
-       [ ] Baseline vs. Trained table, with your prediction written beforehand
-       [ ] Run Log — Before, five criteria across three seeds
-       [ ] Confusion matrix TYPED AS A MARKDOWN TABLE
-       [ ] A verdict on every criterion
-       [ ] A diagnosis for every miss, using the agreement report as evidence
-       [ ] Agreement Report with every disagreement adjudicated
-       [ ] One improvement, with Run Log — After
+       [x] Baseline vs. Trained table, with your prediction written beforehand
+       [x] Run Log — Before, five criteria across three seeds
+       [x] Confusion matrix TYPED AS A MARKDOWN TABLE
+       [x] A verdict on every criterion
+       [x] A diagnosis for every miss, using the agreement report as evidence
+       [x] Agreement Report with every disagreement adjudicated
+       [x] One improvement, with Run Log — After
        [x] What's Still Broken
        [x] results_three_seeds_before.json, results_three_seeds_after.json,
            baseline_results.json and
            agreement_results.json committed
-       [ ] At least four new commits
-       [ ] The SAME repository URL as last unit
+       [x] At least four new commits
+       [x] The SAME repository URL as last unit
 
      Do not delete and recreate this repository.
      ═════════════════════════════════════════════════════════════════════ -->
