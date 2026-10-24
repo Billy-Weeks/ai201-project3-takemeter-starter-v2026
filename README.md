@@ -609,6 +609,20 @@ per-label error analysis of the worst-performing label from the confusion
 matrix, including the label it is most often confused with and what those
 examples have in common.
 
+**Per-label error analysis:** `analysis_review` is tied for the worst label
+with `industry_news` because both have F1 0.000 in every after seed. I analyze
+`analysis_review` because it has the larger test support: all 9 true
+`analysis_review` posts were predicted as `personal_reaction`, while the
+reverse confusion was 0. The analysis posts commonly ask the reader to judge
+or interpret a movie—examples include evaluating why *Crash* is highly rated,
+comparing old and new versions of *Evil Dead*, and debating a film theory—so
+their purpose is evaluation even when the wording contains a question. The
+model is treating that evaluative/questioning language as a personal response,
+and the 128-token input limit may leave it with titles or opening phrasing
+rather than the evidence that distinguishes analysis from reaction. This is
+consistent with the matrix and repeated seed results, but it is not proof that
+the token limit is the only cause.
+
 ### Run Log — After
 
 ### Three-seed spread
